@@ -1,0 +1,23 @@
+button{
+    padding: 12px;
+    width: 190px;
+    cursor: pointer;
+    background: #799be6;
+    color: white;
+    transition: .5s ease;
+    border-radius: 10px;
+   }
+   button:hover{
+    background: green;
+    border: 2px solid #c6539e;
+    box-shadow: 0 0 10px #030915 inset,
+                0 0 10px 4px #070e1d;
+                border-radius: 10px;
+   }
+
+   .bgimage{
+	background-image: url('a956e67c6e22eec886a8f2cec34f1c93.jpg');
+	background-size: 100% 110%;
+	width: 100%;
+	height: 100vh;
+}

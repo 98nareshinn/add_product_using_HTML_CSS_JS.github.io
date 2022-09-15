@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">	
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <script src="Product.js"></script>
+    <link rel="stylesheet" href="/Product.css">
+    <script>
+
+          var ProductArray;//=new Array();    
+                  function addProduct() {
+            let Prod = new Product();
+            Prod.category= document.getElementById("category").value;
+            Prod.PName= document.getElementById("PName").value;
+            Prod.PId= document.getElementById("PId").value;
+            Prod.MfgDate= document.getElementById("MfgDate").value;
+            Prod.ExpDate= document.getElementById("ExpDate").value;
+            Prod.QTY= document.getElementById("QTY").value;
+            Prod.Price=document.getElementById("Price").value;
+            Prod.Discount=document.getElementById("Discount").value;
+            Prod.GST=document.getElementById("GST").value;
+            Prod.TaxPrice=document.getElementById("TaxPrice").value;
+            Prod.TotalPrice=document.getElementById("TotalPrice").value;
+
+
+
+          let json = JSON.stringify(ProductArray);
+           let ProductList = sessionStorage.getItem("ProductList");
+           if(ProductList !==null)
+           {
+            ProductArray= JSON.parse(ProductList);
+           }else
+           {
+                ProductArray=new Array();
+           }
+
+            ProductArray.push(Prod);
+           //convert the array into json
+            let Productstring=JSON.stringify(ProductArray);
+           alert(Productstring);
+           //storing the array of Product in session storage object
+            sessionStorage.setItem("ProductList",Productstring);
+             //let tr = Product.display();
+             let tbody  = document.getElementById("Productdata");
+            // tbody.appendChild(tr);
+            clearForm();
+            //alert(JSON.stringify(ProductArray));
+        }
+        function showProductInTable() {
+              let tbody  = document.getElementById("Productdata");
+
+                //Reading the session storage into emp array
+                ProductArray=JSON.parse(sessionStorage.getItem("ProductList"));
+
+            for (let index = 0; index < ProductArray.length; index++) {
+                const Prod = ProductArray[index];
+                let tr = createRow(Prod);
+                tbody.appendChild(tr);
+            }     
+        }
+
+        
+        function createRow(Prod) {
+            let tr =document.createElement("tr");
+    let td =document.createElement("td");
+    td.innerText=Prod.category;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.PName;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.PId;
+    tr.appendChild(td);
+    
+    td =document.createElement("td");
+    td.innerText=Prod.MfgDate;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.ExpDate;
+    tr.appendChild(td);
+
+
+    td =document.createElement("td");
+    td.innerText=Prod.QTY;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.Price;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.Discount;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.GST;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.TaxPrice;
+    tr.appendChild(td);
+
+    td =document.createElement("td");
+    td.innerText=Prod.TotalPrice
+    tr.appendChild(td);
+    return tr;
+        } 
+    </script>
+</head>
+
+<body>
+    <div class="bgimage">
+        <h1 align="center" style="color: white;">Fill the Product Details</h1> 
+        
+     
+        <hr>
+      <form method="post">
+             <table border="0" width="40%" align="center" 
+                     cellpadding="5" cellspacing="5"
+                     id="tab1" style="color: white;">
+
+                     <tr>
+                        <th>CATEGORY</th>
+                        <td>
+                            <select id="category" name="category">
+                                <option value="1">Mobile</option>
+                                <option value="2" selected>T.V.</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                 <tr>
+                     <th>
+                         PRODUCT NAME
+                     </th>
+                     <td>
+                        <input type="text" id="PName" name="PName"
+                         maxlength="50" placeholder="Enter Product Name" required>
+                     </td>
+                 </tr>
+
+                 <tr>
+                    <th>
+                        PRODUCT ID
+                    </th>
+                    <td>
+                       <input type="number" id="PId" name="PId"
+                        maxlength="50" placeholder="Product Id" required>
+                    </td>
+                </tr>
+
+                 <tr>
+                     <th>
+                         MFG-DATE
+                     </th>
+                     <td>
+                        <input type="date" id="MfgDate" name="MfgDate" placeholder="Mfg-Date"
+                          required value="2022-08-29">
+                     </td>
+                 
+                 <tr>
+                    <th>
+                        EXPIRE DATE
+                    </th>
+                    <td>
+                       <input type="date" id="ExpDate" name="ExpDate" placeholder="Expire Date"
+                         required value="2022-08-29">
+                    </td>
+                </tr>
+                 <tr>
+                     <th>
+                         QTY OF PRODUCT
+                     </th>
+                     <td>
+                        <input type="number" id="QTY" name="QTY"
+                         maxlength="50" placeholder="Quantity of product" required>
+                     </td>
+                 </tr>
+                 <tr>
+                     <th>
+                         PRICE OF PRODUCT
+                     </th>
+                     <td>
+                        <input type="number" id="Price" name="Price"
+                        min="0.00" max="10000.00" placeholder="Price of Product" required>
+                     </td>
+                 </tr>
+                 <tr>
+                    <th>
+                        DISCOUNT%
+                    </th>
+                    <td>
+                       <input type="number" id="Discount" name="Discount"
+                       max="10000.00" placeholder="Discount in %" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        GST
+                    </th>
+                    <td>
+                       <input type="number" id="GST" name="GST"
+                           max="10000.00" placeholder="GST in %" required>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        TAX
+                    </th>
+                    <td>
+                       <input type="number" id="TaxPrice" name="TaxPrice"
+                           max="10000.00" placeholder="TAX in %" required>
+                    </td>
+                </tr>
+                
+                </tr>
+                <th>
+                    TOTAL PRICE
+                </th>
+                <td>
+                   <input type="number" id="TotalPrice" name="TotalPrice"
+                        max="10000.00" placeholder="Total Price" required>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+             <td colspan="2" align="center">
+<button class="button button1" type="button" id="btn1" name="btn2" value="Add Product"onclick="addProduct()">ADD PRODUCT</button>
+<button class="button button2" type="button" id="btn4" name="btn4" value="Display Product" onclick="showProductInTable()">DISPLAY BUTTON</button>
+<!--<button class="button button3" type="submit" id="btn2" name="btn2" value="Submit button">Submit button</button>-->
+<button class="button button4" type="reset" id="btn3" name="reset" >CLEAR BUTTUN</button>
+</td>
+</tr>
+</table>    
+
+
+
+             
+             
+             <br>
+             <br>
+             <div class="displayProduct">
+                 <table align="center" width="50%" cellpadding="5"
+                 border="1">
+                     <thead>
+                     <tr style="background-color:rgb(142, 153, 234);" >
+                        <th>Category</th>
+                         <th>PName</th>
+                         <th>PID</th>
+                         <th>MfgDate</th>
+                         <th>ExpDate</th>
+                         <th>QTY</th>
+                         <th>Price</th>
+                         <th>Discount</th>
+                         <th>GST</th>
+                         <th>TaxPrice</th>
+                         <th>TotalPrice</th>
+                     </tr>
+                 </thead>
+                 <tbody id="Productdata" style="background-blend-mode:hard-light; color: aliceblue;" >
+                 </tbody>
+                 </table>
+             </div>
+        </form>
+    </div>
+</body>
+</html>
